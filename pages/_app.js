@@ -1,4 +1,5 @@
 import * as React from "react"
+import Head from 'next/head'
 import { ChakraProvider, extendTheme } from "@chakra-ui/react"
 
 import Fonts from '../styles/Fonts'
@@ -12,11 +13,16 @@ const theme = extendTheme({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider theme={theme}>
-      <Fonts />
-      <Component {...pageProps} />
-    </ChakraProvider>
-    )
+    <>
+      <Head>
+        <title>Week</title>
+      </Head>
+      <ChakraProvider theme={theme}>
+        <Fonts />
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </>
+  )
 }
 
 export default MyApp

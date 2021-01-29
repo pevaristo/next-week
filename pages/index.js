@@ -34,12 +34,12 @@ function Week({ appointments }) {
 
   return (
     <Container>
-      <Heading>Week</Heading>
+      <Heading p={4}>Week</Heading>
       <Center>
         <Grid
           templateColumns="repeat(25, 1fr)"
           templateRows="repeat(8, 1fr)"
-          gap={2}>
+          gap={1}>
           {/* Items in Legend */}
           {[...Array(24)].map(
             (value = null, index = number) => (
@@ -48,7 +48,15 @@ function Week({ appointments }) {
           )}
           {[...Array(daysWeek.length)].map(
             (value = null, index = number) => (
-              <GridItem rowStart={index + 2} colStart={1} key={index} bg="blue.200" fontSize="2xl" > { daysWeek[index]} </GridItem>
+              <GridItem 
+              p={3}
+              rowStart={index + 2} 
+              colStart={1} 
+              key={index} 
+              bg="blue.50" 
+              fontSize="2xl">
+              <Text fontSize="2xl"> { daysWeek[index] } </Text>
+              </GridItem>
             )
           )}
           {appointments.map((appointment) => (
@@ -61,8 +69,38 @@ function Week({ appointments }) {
               colStart={appointment.start + 2}
               colEnd={appointment.end + 2}
               boxShadow="outline"
-              rounded="md">
+              bg="gray.100"
+              rounded="md"
+              isTruncated>
 
+              <Drawer
+                isOpen={isOpen}
+                placement="right"
+                onClose={onClose}
+                finalFocusRef={btnRef}
+              >
+                <DrawerOverlay>
+                  <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader>
+                      <CalendarIcon size="8" />
+                      <Box> Appointment</Box>
+                    </DrawerHeader>
+
+                    <DrawerBody>
+                      <Box ml="2">Not implemented!</Box>
+                      <Input placeholder="Type here..." />
+                    </DrawerBody>
+
+                    <DrawerFooter>
+                      <Button variant="outline" mr={3} onClick={onClose}>
+                        Cancel
+              </Button>
+                      <Button color="blue">Save</Button>
+                    </DrawerFooter>
+                  </DrawerContent>
+                </DrawerOverlay>
+              </Drawer>
               <Flex>
                 {/*<IconButton
                   //onClick={props.onClick}
@@ -79,34 +117,6 @@ function Week({ appointments }) {
                   </Text>
                 </Box>
               </Flex>
-              <Drawer
-                isOpen={isOpen}
-                placement="right"
-                onClose={onClose}
-                finalFocusRef={btnRef}
-              >
-                <DrawerOverlay>
-                  <DrawerContent>
-                    <DrawerCloseButton />
-                    <DrawerHeader>
-                      <CalendarIcon size="8" />
-                       <Box> Appointment</Box>
-                       </DrawerHeader>
-
-                    <DrawerBody>
-                      <Box ml="2">Not implemented!</Box>
-                      <Input placeholder="Type here..." />
-                    </DrawerBody>
-
-                    <DrawerFooter>
-                      <Button variant="outline" mr={3} onClick={onClose}>
-                        Cancel
-              </Button>
-                      <Button color="blue">Save</Button>
-                    </DrawerFooter>
-                  </DrawerContent>
-                </DrawerOverlay>
-              </Drawer>
             </GridItem>
 
           ))}
